@@ -1,6 +1,7 @@
 import './App.css';
 import {Component} from 'react'
 import {Auth, getUser} from './auth'
+import { getUserFragments } from './api';
 
 class App extends Component {
   state = {
@@ -18,7 +19,10 @@ class App extends Component {
   init = async() => {
     const user = await getUser()
     console.log(user)
-    this.setState({username: user.username})
+    if (user !== null){
+      getUserFragments(user)
+      this.setState({username: user.username})
+    }
   }
   render (){
     return (
